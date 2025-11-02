@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 // db.ts is in src/lib/db.ts, so go up 3 levels then into src/lib
 import { charities } from '../../../src/lib/db';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function POST(req: NextRequest) {
   try {
