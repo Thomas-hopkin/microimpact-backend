@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
     if (!charity?.stripeAccountId || charity.status !== 'active') {
       return NextResponse.json({ error: 'Charity not ready yet' }, { status: 400 });
     }
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://microimpact-backend.vercel.app';
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -28,8 +29,9 @@ export async function POST(req: NextRequest) {
         quantity: 1,
       }],
       customer_email: donorEmail,
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/impact?ok=1`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/donate?canceled=1`,
+      success_url: `${baseUrl}/impact?ok=1`,
+cancel_url: `${baseUrl}/donate?canceled=1`,
+
       payment_intent_data: {
         // 💸 Route funds directly to the charity's (test) account
         transfer_data: { destination: charity.stripeAccountId },
