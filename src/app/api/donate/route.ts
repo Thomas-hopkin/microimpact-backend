@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Charity not ready yet' }, { status: 400 });
     }
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://microimpact-backend.vercel.app';
+console.log('baseUrl =', baseUrl);
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
