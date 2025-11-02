@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 // db.ts is in src/lib/db.ts, so go up 3 levels then into src/lib
-import { charities } from '../../../lib/db';
+import { charities } from '../../../src/lib/db';
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
